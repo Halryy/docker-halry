@@ -12,4 +12,10 @@ class HelloController
     {
         return new Response('hfdsfhs');
     }
+
+    #[Route('/estudarSymfony')]
+    public function estudarSymfony(): Response
+    {
+        return new Response('estudar symfony é muito bom');
+    }
 }
