@@ -1,0 +1,45 @@
+server {
+	listen 80;
+	server_name *.halry.com.br;
+	root /var/www/halry.com.br/public;
+
+	client_max_body_size 1024M;
+
+	location / {
+		try_files $uri /index.php$is_args$args;
+	}
+
+	location ~ ^/index\.php(/|$) {
+		fastcgi_pass appix-php:9000;
+		fastcgi_split_path_info ^(.+\.php)(/.*)$;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+		fastcgi_param DOCUMENT_ROOT $realpath_root;
+		internal;
+	}
+	
+    location /wss2/ {
+		proxy_pass http://appix-php:8183;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $host;
+		proxy_read_timeout 86400;
+    }
+
+    location /wss2-vts/ {
+		proxy_pass http://appix-php:8182;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $host;
+		proxy_read_timeout 86400;
+    }
+
+	location ~ \.php$ {
+		return 404;
+	}
+
+	error_log /var/log/nginx/halry.com.br.error.log crit;
+	access_log /var/log/nginx/halry.com.br.access.log combined buffer=512k flush=1m;
+}

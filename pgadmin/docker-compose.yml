@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+        PGADMIN_DEFAULT_EMAIL: halry@appix.com.br
+        PGADMIN_DEFAULT_PASSWORD: halry102030
+    networks:
+      default:
+        ipv4_address: 172.16.0.6
+
+networks:
+  default:
+    external:
+      name: docker-nw

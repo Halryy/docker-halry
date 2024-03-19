@@ -1,0 +1,11 @@
+## create network
+docker network create --driver bridge --subnet 172.16.0.0/24 docker-nw
+
+## create image
+# appix-php8.1-fpm$: ./build.sh
+
+## start containers
+# nginx-proxy$: docker compose up -d
+# app$: docker compose up -d
+# postgres$: docker compose up -d
+# pgadmin$: docker compose up -d

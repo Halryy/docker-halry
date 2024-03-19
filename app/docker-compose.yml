@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+  appix-nginx:
+    image: nginx:latest
+    container_name: appix-nginx
+    restart: unless-stopped
+    environment: 
+      VIRTUAL_HOST: '*.halry.com.br'
+    expose:
+      - 80
+      - 8080
+    networks:
+      default:
+        ipv4_address: 172.16.0.26
+    volumes:
+      - ./conf/nginx/halry.com.br.vhost:/etc/nginx/conf.d/halry.com.br.conf
+      - ./sourcecode/public:/var/www/halry.com.br/public
+      - ../../nginx-proxy/conf/letsencrypt/acme-challenge:/var/www/acme-challenge
+    working_dir: /var/www/halry.com.br
+
+  appix-php:
+    build:
+      context: ./docker/php8-fpm
+    container_name: appix-php
+    restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 172.16.0.27
+    volumes:
+      - ./sourcecode:/var/www/halry.com.br
+      - ./data/:/data/app/
+      - ./conf/php/local.ini:/usr/local/etc/php/conf.d/local.ini:ro
+    working_dir: /var/www/halry.com.br
+
+networks:
+  default:
+    external: true
+    name: docker-nw
