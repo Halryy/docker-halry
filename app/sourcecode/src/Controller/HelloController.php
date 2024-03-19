@@ -13,7 +13,14 @@ class HelloController
         return new Response('hfdsfhs');
     }
 
-    #[Route('/estudarSymfony')]
+    // {nome_do_animal} || {slug}
+    #[Route('/animal/{nome_do_animal}')]
+    public function animal(string $nome_do_animal = null): Response
+    {
+        return new Response('olá, '.$nome_do_animal);
+    }
+
+    #[Route('/estudar_symfony')]
     public function estudarSymfony(): Response
     {
         return new Response('estudar symfony é muito bom');
