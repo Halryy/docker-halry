@@ -18,6 +18,7 @@ class HelloController extends AbstractController
             ['name'=> 'butano','phone'=> '(22) 4215-4552'],
             ['name'=> 'propano','phone'=> '(15) 94324-4264'],
         ];
+
         return $this->render('hello/homepage.html.twig', [
             'users' => $users
         ]);
