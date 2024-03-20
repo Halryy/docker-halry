@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Home page</h1>
+    Bem vindo ao nosso site
+
+    <br>
+    <br>    
+    <ul>
+        {% for user in users %}
+            <li>Nome: {{ user.name }} - Fone: {{ user.phone }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
