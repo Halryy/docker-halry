@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
+{% block title %}Lista de tarefas{% endblock %}
 {% block body %}
 	<form method="POST" action="{{ path('create-task') }}">
 		<div class="input-group mb-3">
-			<input type="text" class="form-control">
+			<input name="taskContent" type="text" class="form-control">
+			<input name="taskStatus" value="incomplete" type="hidden">
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary" type="submit">Adicionar tarefa</button>
 			</div>
