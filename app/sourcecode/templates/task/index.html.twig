@@ -1,13 +1,44 @@
 {% extends 'base.html.twig' %}
-{% block title %}Lista de tarefas{% endblock %}
+{% block title %}Lista de tarefas
+{% endblock %}
 {% block body %}
 	<form method="POST" action="{{ path('create-task') }}">
 		<div class="input-group mb-3">
-			<input name="taskContent" type="text" class="form-control">
-			<input name="taskStatus" value="incomplete" type="hidden">
+			<input
+			name="taskContent" type="text" class="form-control">
+			<!-- <input name="taskStatus" value="incomplete" type="hidden"> -->
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary" type="submit">Adicionar tarefa</button>
 			</div>
 		</div>
 	</form>
+	<div class="p-3">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="text-start">Tarefas</th>
+					<th class="text-end">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for task in tasks %}
+					<tr>
+						<td>
+							<p>{{ task.content }}</p>
+						</td>
+						<td class="text-end">
+							<div class="btn-group" role="group">
+								<a href="{{ path('update-task', {'id': task.id}) }}">
+									<button type="button" class="btn btn-primary">Editar</button>
+								</a>
+								<a href="{{ path('delete-task', {'id': task.id}) }}">
+									<button type="button" class="btn btn-danger">Deletar</button>
+								</a>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

@@ -16,7 +16,7 @@ class Task
     #[ORM\Column(nullable: true, name: "content", type: "string")]
     private ?string $content = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $status = null;
 
     public function getId(): ?int

@@ -20,8 +20,13 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     public function save(Task $task){
-        dump($this);
         $this->em->persist($task);
         $this->em->flush();
+    }
+
+    public function findAllTasks() {
+        return $this->createQueryBuilder('p')
+        ->getQuery()
+        ->getResult();
     }
 }
