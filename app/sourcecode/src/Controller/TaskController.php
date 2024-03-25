@@ -44,14 +44,14 @@ class TaskController extends AbstractController
     }
 
     #[Route('/update/{id}', 'update-task')]
-    public function update(EntityManagerInterface $em): RedirectResponse
+    public function update($id, EntityManagerInterface $em): RedirectResponse
     {
-        dd('fazer update');
+        dd('fazer update '.$id);
     }
 
     #[Route('/delete/{id}', 'delete-task')]
-    public function delete(EntityManagerInterface $em): RedirectResponse
+    public function delete($id, EntityManagerInterface $em): RedirectResponse
     {
-        dd('fazer delete');
+        dd('fazer delete '.$id);
     }
 }
