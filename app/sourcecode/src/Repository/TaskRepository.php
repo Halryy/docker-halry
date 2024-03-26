@@ -24,9 +24,19 @@ class TaskRepository extends ServiceEntityRepository
         $this->em->flush();
     }
 
+    public function delete(Task $task){
+        $this->em->remove($task);
+        $this->em->flush();
+    }
+
     public function findAllTasks() {
         return $this->createQueryBuilder('p')
         ->getQuery()
         ->getResult();
+    }
+
+    public function findOneTask(int $id): ?Task
+    {
+        return $this->findOneBy(['id' => $id]);
     }
 }

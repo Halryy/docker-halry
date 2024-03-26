@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}Editar tarefa
+{% endblock %}
+{% block body %}
+	<form method="POST" action="{{ path('update-task', {'id': task.id }) }}">
+		<div class="input-group mb-3">
+			<input value="{{ task.content }}" name="taskContent" type="text" class="form-control">
+			<!-- <input name="taskStatus" value="incomplete" type="hidden"> -->
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="submit">Alterar</button>
+                <a href="{{ path('homepage') }}"><button class="btn btn-outline-secondary" type="button">Cancelar</button></a>
+			</div>
+		</div>
+	</form>
+{% endblock %}
